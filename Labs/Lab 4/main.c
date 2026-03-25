@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "triangle.h"
-
+//zacazchik( tol'ko vvod i vuvod)
 int main() {
     double a, b, c;
     printf("Enter side A: ");

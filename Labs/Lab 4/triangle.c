@@ -1,11 +1,12 @@
 #include "triangle.h"
 #include <math.h>
-
-int is_valid_triangle(double a, double b, double c) {
+#include <stdbool.h>
+//zavod (vushislenie)
+bool is_valid_triangle(double a, double b, double c) {
     if (a + b > c && a + c > b && b + c > a) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 double get_perimeter(double a, double b, double c) {
