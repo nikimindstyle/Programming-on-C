@@ -2,15 +2,11 @@
 #include <stdlib.h>
 #include "matrix.h"
 
-double* A;
-double* B;
-double* Result;
-
 int main() {
-    int n, size;
+    int n, i, j;
     char op;
-    
-    int i, j;
+    double **A, **B, **Result;
+
     printf("Enter matrix size N: ");
     scanf("%d", &n);
 
@@ -19,43 +15,62 @@ int main() {
         return 1;
     }
 
-    size = n * n;
-    A = (double*)malloc(size * sizeof(double));
-    B = (double*)malloc(size * sizeof(double));
+    A = (double**)malloc(n * sizeof(double*));
+    for (i = 0; i < n; i++) {
+        A[i] = (double*)malloc(n * sizeof(double));
+    }
+
+    B = (double**)malloc(n * sizeof(double*));
+    for (i = 0; i < n; i++) {
+        B[i] = (double*)malloc(n * sizeof(double));
+    }
 
     if (A == NULL || B == NULL) {
         printf("Error: Memory allocation failed.\n");
         return 1;
     }
-    printf("Enter elements for Matrix A (%d numbers):\n", size);
-    for (i = 0; i < size; i++) { 
-        scanf("%lf", &A[i]);
+
+    printf("Enter elements for Matrix A:\n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("A[%d][%d]: ", i, j);
+            scanf("%lf", &A[i][j]);
+        }
     }
-    printf("Enter elements for Matrix B (%d numbers):\n", size);
-    for (i = 0; i < size; i++) { 
-        scanf("%lf", &B[i]);
+
+    printf("Enter elements for Matrix B:\n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("B[%d][%d]: ", i, j);
+            scanf("%lf", &B[i][j]);
+        }
     }
 
     printf("Enter operation (+, -, *): ");
-    scanf(" %c", &op); 
+    scanf(" %c", &op);
+
+
     Result = calculate_matrices(A, B, n, op);
 
     if (Result == NULL) {
-        printf("Error: Calculation failed or invalid operation.\n");
-        free(A);
-        free(B);
+        printf("Error: Calculation failed.\n");
         return 1;
     }
+
+
     printf("\nResult Matrix (%c):\n", op);
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
-            printf("%.2lf\t", Result[i * n + j]);
+            printf("%.2lf\t", Result[i][j]);
         }
         printf("\n");
     }
 
+    for (i = 0; i < n; i++) free(A[i]);
     free(A);
+    for (i = 0; i < n; i++) free(B[i]);
     free(B);
+    for (i = 0; i < n; i++) free(Result[i]);
     free(Result);
 
     printf("Memory free.\n");
