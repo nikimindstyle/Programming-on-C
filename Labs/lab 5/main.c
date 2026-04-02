@@ -50,7 +50,7 @@ int main() {
     scanf(" %c", &op);
 
 
-    Result = calculate_matrices(A, B, n, op);
+    Result = calc_matrix(A, B, n, op);
 
     if (Result == NULL) {
         printf("Error: Calculation failed.\n");
@@ -74,6 +74,31 @@ int main() {
     free(Result);
 
     printf("Memory free.\n");
+
+    return 0;
+    printf("Enter operation (+, -, *): ");
+    scanf(" %c", &op);
+	Result = calc_matrix(A, B, n, op);
+
+    if (Result == NULL) {
+        printf("Error: Calculation failed or invalid operation.\n");
+        return 1;
+    }
+
+    printf("\nResult Matrix (%c):\n", op);
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%.2lf\t", Result[i][j]);
+        }
+        printf("\n");
+    }
+
+    for (i = 0; i < n; i++) free(A[i]);
+    free(A);
+    for (i = 0; i < n; i++) free(B[i]);
+    free(B);
+    for (i = 0; i < n; i++) free(Result[i]);
+    free(Result);
 
     return 0;
 }
