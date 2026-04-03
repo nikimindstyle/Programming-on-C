@@ -4,30 +4,33 @@
 double** create_matrix(int n) {
     int i;
     double** M = (double**)malloc(n * sizeof(double*));
-    if (M == NULL) return NULL;
+    if (M == 0) return 0;
     
     for (i = 0; i < n; i++) {
         M[i] = (double*)malloc(n * sizeof(double));
-        if (M[i] == NULL) return NULL;
+        if (M[i] == 0) return 0;
     }
     return M;
 }
 
-double** matrix_plus(double** A, double** B, int n) {
+double** matrix_add(double** A, double** B, int n) {
     int i, j;
     double** C = create_matrix(n);
+    if (C == 0) return 0;
+
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
             C[i][j] = A[i][j] + B[i][j];
         }
     }
-
     return C;
 }
 
-double** matrix_minus(double** A, double** B, int n) {
+double** matrix_sub(double** A, double** B, int n) {
     int i, j;
     double** C = create_matrix(n);
+    if (C == 0) return 0;
+
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
             C[i][j] = A[i][j] - B[i][j];
@@ -36,9 +39,11 @@ double** matrix_minus(double** A, double** B, int n) {
     return C;
 }
 
-double** matrix_multi(double** A, double** B, int n) {
+double** matrix_mul(double** A, double** B, int n) {
     int i, j, k;
     double** C = create_matrix(n);
+    if (C == 0) return 0;
+
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
             C[i][j] = 0.0;
@@ -50,15 +55,15 @@ double** matrix_multi(double** A, double** B, int n) {
     return C;
 }
 
-double** calculate_matrices(double** A, double** B, int n, char op) {
+double** calc_matrix(double** A, double** B, int n, char op) {
     if (op == '+') {
-        return matrix_plus(A, B, n);
+        return matrix_add(A, B, n);
     } 
     else if (op == '-') {
-        return matrix_minus(A, B, n);
+        return matrix_sub(A, B, n);
     } 
     else if (op == '*') {
-        return matrix_multi(A, B, n);
+        return matrix_mul(A, B, n);
     }
     
     return 0;

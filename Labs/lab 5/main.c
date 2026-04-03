@@ -7,6 +7,8 @@ int main() {
     char op;
     double **A, **B, **Result;
 
+
+
     printf("Enter matrix size N: ");
     scanf("%d", &n);
 
@@ -14,6 +16,8 @@ int main() {
         printf("Error: Size must be positive.\n");
         return 1;
     }
+
+
 
     A = (double**)malloc(n * sizeof(double*));
     for (i = 0; i < n; i++) {
@@ -25,10 +29,15 @@ int main() {
         B[i] = (double*)malloc(n * sizeof(double));
     }
 
+
+
     if (A == NULL || B == NULL) {
         printf("Error: Memory allocation failed.\n");
         return 1;
     }
+
+
+
 
     printf("Enter elements for Matrix A:\n");
     for (i = 0; i < n; i++) {
@@ -37,6 +46,9 @@ int main() {
             scanf("%lf", &A[i][j]);
         }
     }
+
+
+
 
     printf("Enter elements for Matrix B:\n");
     for (i = 0; i < n; i++) {
@@ -49,41 +61,20 @@ int main() {
     printf("Enter operation (+, -, *): ");
     scanf(" %c", &op);
 
-
     Result = calc_matrix(A, B, n, op);
 
-    if (Result == NULL) {
-        printf("Error: Calculation failed.\n");
-        return 1;
-    }
 
-
-    printf("\nResult Matrix (%c):\n", op);
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < n; j++) {
-            printf("%.2lf\t", Result[i][j]);
-        }
-        printf("\n");
-    }
-
-    for (i = 0; i < n; i++) free(A[i]);
-    free(A);
-    for (i = 0; i < n; i++) free(B[i]);
-    free(B);
-    for (i = 0; i < n; i++) free(Result[i]);
-    free(Result);
-
-    printf("Memory free.\n");
-
-    return 0;
-    printf("Enter operation (+, -, *): ");
-    scanf(" %c", &op);
-	Result = calc_matrix(A, B, n, op);
 
     if (Result == NULL) {
         printf("Error: Calculation failed or invalid operation.\n");
+        for (i = 0; i < n; i++) free(A[i]);
+        free(A);
+        for (i = 0; i < n; i++) free(B[i]);
+        free(B);
         return 1;
     }
+
+
 
     printf("\nResult Matrix (%c):\n", op);
     for (i = 0; i < n; i++) {
@@ -99,6 +90,7 @@ int main() {
     free(B);
     for (i = 0; i < n; i++) free(Result[i]);
     free(Result);
+    printf("\nMemory free!.\n");
 
     return 0;
 }
