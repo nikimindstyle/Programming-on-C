@@ -14,7 +14,7 @@ int main() {
 
     if (n <= 0) {
         printf("Error: Size must be positive.\n");
-        return 1;
+        return 1; 
     }
 
 
@@ -31,7 +31,7 @@ int main() {
 
 
 
-    if (A == NULL || B == NULL) {
+    if (A == NULL || B == 0) {
         printf("Error: Memory allocation failed.\n");
         return 1;
     }
@@ -65,7 +65,7 @@ int main() {
 
 
 
-    if (Result == NULL) {
+    if (Result == 0) {
         printf("Error: Calculation failed or invalid operation.\n");
         for (i = 0; i < n; i++) free(A[i]);
         free(A);
